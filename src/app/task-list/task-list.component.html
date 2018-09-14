@@ -1,6 +1,14 @@
 <div>Home Dasboard - Development</div>
-<ul>
-  <li *ngFor="let task of tasks | async">
-    {{ task.body }}
-  </li>
-</ul>
+
+
+<div *ngFor="let task of urgentTask | async">
+  <app-task [task]="task"></app-task>
+</div>
+<div *ngFor="let task of tasks | async">
+  <app-task [task]="task"></app-task>
+</div>
+
+<div>Completed</div>
+<div *ngFor="let task of completedTask | async">
+  <app-task [task]="task"></app-task>
+</div>

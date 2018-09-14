@@ -7,7 +7,7 @@ export class Task {
   createdOn: number;
   completedOn: number;
   tag: string[];
-
+  urgent: boolean;
 
   constructor(body: string, tag: string[] = []) {
     this.id = Guid.newGuid();
@@ -16,6 +16,7 @@ export class Task {
     this.completed = false;
     this.createdOn = new Date().getTime();
     this.completedOn = -1;
+    this.urgent = false;
   }
 
   static from(task: Task): Task {
@@ -24,6 +25,7 @@ export class Task {
     t.completedOn = task.completedOn;
     t.completed = task.completed;
     t.createdOn = task.createdOn;
+    t.urgent = task.urgent;
     return t;
   }
 

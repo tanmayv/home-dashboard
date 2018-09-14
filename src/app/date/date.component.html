@@ -1,0 +1,10 @@
+
+<div class="time-container" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
+  <div>{{("0" + date.getHours()%12).slice(-2)}}</div>
+  <div>:</div>
+  <div>{{("0" + date.getMinutes()).slice(-2)}}</div>
+  <div class="small">{{ date.getHours() > 11 ? 'PM' : 'AM'}}</div>
+</div>
+<div class="date-container" fxLayoutAlign="center center">
+  {{date | date: 'MMMM dd, yyyy'}}
+</div>
