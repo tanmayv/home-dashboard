@@ -1,4 +1,3 @@
-
 <div class="time-container" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
   <div>{{("0" + date.getHours()%12).slice(-2)}}</div>
   <div>:</div>
@@ -7,4 +6,19 @@
 </div>
 <div class="date-container" fxLayoutAlign="center center">
   {{date | date: 'MMMM dd, yyyy'}}
+</div>
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="40px">
+  <div class="count red">
+    <div class="big">{{urgentCount}}</div>
+    <div class="subtext">Urgent Tasks</div>
+  </div>
+  <div class="count white">
+    <div class="big">{{pendingCount + urgentCount}}</div>
+    <div class="subtext">Tasks Remaining</div>
+  </div>
+</div>
+
+<div fxLayoutAlign="row">
+  <div class="remaining-block" [fxFlex]="remainingTimePerCent"></div>
+  <div class="elapsed-block" [fxFlex]="100-remainingTimePerCent"></div>
 </div>

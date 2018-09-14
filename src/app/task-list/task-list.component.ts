@@ -13,9 +13,9 @@ export class TaskListComponent implements OnInit {
   private pendingTaskCollection: AngularFirestoreCollection<Task>;
   private urgentTaskCollection: AngularFirestoreCollection<Task>;
   private completedTaskCollection: AngularFirestoreCollection<Task>;
-  tasks: Observable<any>;
+  tasks = [];
   completedTask: Observable<any>;
-  urgentTask: Observable<any>;
+  urgentTask = [];
   date = new Date();
   constructor(store: AngularFirestore) {
     console.log('date key', Utility.todayDateKey());
@@ -31,11 +31,12 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // const newTask = new Task('I\'m the first task ever created');
-    // this.taskCollection.add(newTask.getData());
-    this.tasks = this.pendingTaskCollection.valueChanges();
+    this.pendingTaskCollection.valueChanges().forEach((data) => {
+      this.tasks = data;
+    });
     this.completedTask = this.completedTaskCollection.valueChanges();
-    this.urgentTask = this.urgentTaskCollection.valueChanges();
-    // this.taskCollection.doc(newTask.id).set(newTask.getData());
+    this.urgentTaskCollection.valueChanges().forEach((data) => {
+      this.urgentTask = data;
+    });
   }
 }

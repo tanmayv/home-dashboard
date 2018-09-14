@@ -1,14 +1,18 @@
-<div>Home Dasboard - Development</div>
+<div fxLayout="row">
+  <div fxFlex="60" fxLayoutGap="15px" style="margin-top: 20px; margin-left : 20px">
+    <div *ngFor="let task of urgentTask">
+      <app-task [task]="task"></app-task>
+    </div>
+    <div *ngFor="let task of tasks">
+      <app-task [task]="task"></app-task>
+    </div>
 
-
-<div *ngFor="let task of urgentTask | async">
-  <app-task [task]="task"></app-task>
-</div>
-<div *ngFor="let task of tasks | async">
-  <app-task [task]="task"></app-task>
-</div>
-
-<div>Completed</div>
-<div *ngFor="let task of completedTask | async">
-  <app-task [task]="task"></app-task>
+    <div *ngFor="let task of completedTask | async">
+      <app-task [task]="task"></app-task>
+    </div>
+  </div>
+  <app-date
+    [urgentCount]="urgentTask.length"
+    [pendingCount]="tasks.length"
+  ></app-date>
 </div>
