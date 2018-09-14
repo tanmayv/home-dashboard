@@ -1,9 +1,10 @@
 .container {
-  font-size: 32px;
-  height: 42px;
+  font-size: 28px;
+  min-height: 42px;
   padding-left: 8px;
   border-left: solid 5px black;
   text-transform: capitalize;
+  margin-bottom: 5px;
 }
 
 .urgent {

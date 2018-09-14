@@ -16,21 +16,29 @@ export class TaskListComponent implements OnInit {
   tasks = [];
   completedTask: Observable<any>;
   urgentTask = [];
-  date = new Date();
-  constructor(store: AngularFirestore) {
+
+  constructor(private store: AngularFirestore) {
     console.log('date key', Utility.todayDateKey());
-    this.pendingTaskCollection = store.collection(Utility.todayDateKey(), ref => ref
-      .where('completed', '==', false)
-      .where('urgent', '==', false)
-    );
-    this.urgentTaskCollection = store.collection(Utility.todayDateKey(), ref => ref
-      .where('completed', '==', false)
-      .where('urgent', '==', true)
-    );
-    this.completedTaskCollection = store.collection(Utility.todayDateKey(), ref => ref.where('completed', '==', true));
+
   }
 
   ngOnInit() {
+    this.updateSubscibers();
+    setInterval(() => {
+      this.updateSubscibers();
+    }, 1000 * 60 * 60 * 30);
+  }
+
+  updateSubscibers() {
+    this.pendingTaskCollection = this.store.collection(Utility.todayDateKey(), ref => ref
+      .where('completed', '==', false)
+      .where('urgent', '==', false)
+    );
+    this.urgentTaskCollection = this.store.collection(Utility.todayDateKey(), ref => ref
+      .where('completed', '==', false)
+      .where('urgent', '==', true)
+    );
+    this.completedTaskCollection = this.store.collection(Utility.todayDateKey(), ref => ref.where('completed', '==', true));
     this.pendingTaskCollection.valueChanges().forEach((data) => {
       this.tasks = data;
     });
